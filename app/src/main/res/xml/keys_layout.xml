@@ -19,11 +19,10 @@
         <Key android:codes="112" android:keyLabel="ら"/>
         <Key android:codes="112" android:keyLabel="わ"/>
         <Key android:codes="112" android:keyLabel="ん"/>
-        <Key android:codes="112" android:keyLabel="°"/>
+        <Key android:codes="60" android:keyLabel="&lt;"/>
     </Row>
 
     <Row>
-        <Key android:codes="-5" android:keyLabel="を"/>
         <Key android:codes="97" android:keyLabel="い"/>
         <Key android:codes="115" android:keyLabel="き"/>
         <Key android:codes="100" android:keyLabel="し"/>
@@ -34,7 +33,7 @@
         <Key android:codes="107" android:keyLabel="り"/>
         <Key android:codes="-5" android:keyLabel="を"/>
         <Key android:codes="-5" android:keyLabel="ゃ"/>
-        <Key android:codes="-5" android:keyLabel="̏"/>
+        <Key android:codes="-5" android:keyLabel="っ"/>
 
     </Row>
 
@@ -76,7 +75,8 @@
         <Key android:codes="109" android:keyLabel="も"/>
         <Key android:codes="46" android:keyLabel="ろ"/>
         <Key android:codes="46" android:keyLabel="よ"/>
-        <Key android:codes="46" android:keyLabel="っ"/>
-        <Key android:codes="46" android:keyLabel="-"/>
+        <Key android:codes="46" android:keyLabel="̏" android:keyWidth="5%p"/>
+        <Key android:codes="112" android:keyLabel="°" android:keyWidth="5%p"/>
+        <Key android:codes="46" android:keyLabel="ア"/>
     </Row>
 </Keyboard>

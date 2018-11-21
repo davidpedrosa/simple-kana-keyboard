@@ -3,12 +3,12 @@ package davidpedrosa.github.com.kanaboard.helper;
 public abstract class KanaKeyGroup
 {
     
-    public abstract char [][] getKeys();
+    public abstract char [][] getNormalKeys();
     public abstract char [][] getVoicedKeys();
     public abstract char [][] getSemiVoicedKeys();
     
     public char [][] getKeys(KanaKeyStatus status) {
-        char [][] keys = getKeys();
+        char [][] keys = getNormalKeys();
         char [][] voicedKeys = getVoicedKeys();
         char [][] semiVoicedKeys = getSemiVoicedKeys();
         

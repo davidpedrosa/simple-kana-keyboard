@@ -4,18 +4,14 @@ import android.inputmethodservice.InputMethodService;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputConnection;
-
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.stream.Stream;
 
 import davidpedrosa.github.com.kanaboard.helper.HiraganaKeyGroup;
 import davidpedrosa.github.com.kanaboard.helper.KanaKeyGroup;
 import davidpedrosa.github.com.kanaboard.helper.KanaKeyStatus;
 import davidpedrosa.github.com.kanaboard.helper.KatakanaKeyGroup;
+import davidpedrosa.github.com.kanaboard.helper.MatrixColumnIterator;
 
 public class MyInputMethodService extends InputMethodService implements KeyboardView.OnKeyboardActionListener {
 
@@ -25,10 +21,13 @@ public class MyInputMethodService extends InputMethodService implements Keyboard
     private static final KanaKeyGroup hiraganaKeyGroup = new HiraganaKeyGroup();
     private static final KanaKeyGroup katakanaKeyGroup = new KatakanaKeyGroup();
 
-    private static final KanaKeyStatus kanaStatus = KanaKeyStatus.NORMAL;
+    private static KanaKeyStatus kanaStatus = KanaKeyStatus.NORMAL;
 
     private static final int FIRST_KATAKANA_CODE = (int) 'ア';
     private static final int FIRST_HIRAGANA_CODE = (int) 'あ';
+    private static final int SWITCH_VOICED_CODE = (int) '̏';
+    private static final int SWITCH_SEMI_VOICED = (int) '°';
+    private static final int DELETE_CODE = (int) '<';
 
     private boolean katakana = false;
 
@@ -39,12 +38,25 @@ public class MyInputMethodService extends InputMethodService implements Keyboard
     public KanaKeyGroup getKanaGroup() {
         return katakana ? katakanaKeyGroup : hiraganaKeyGroup;
     }
+    private boolean charIn(char c, char[][] matrix) {
+        for (int i = 0; i< matrix.length; i++)
+            for (int k = 0; k < matrix[i].length; k++)
+                if (matrix[i][k] == c)
+                    return true;
+        return false;
+    }
     @Override
     public View onCreateInputView() {
         keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.keyboard_view, null);
         keyboard = new Keyboard(this, R.xml.keys_layout);
         keyboardView.setKeyboard(keyboard);
         keyboardView.setOnKeyboardActionListener(this);
+        char [][] matrix = getKanaGroup().getKeys(kanaStatus);
+        for (Keyboard.Key key: keyboard.getKeys()){
+            if (! charIn(key.label.toString().charAt(0), matrix)) {
+                System.out.println(key.toString());
+            }
+        }
         reloadKeyboard();
 
 
@@ -66,25 +78,13 @@ public class MyInputMethodService extends InputMethodService implements Keyboard
         InputConnection inputConnection = getCurrentInputConnection();
         if (inputConnection != null) {
             switch(primaryCode) {
-                case Keyboard.KEYCODE_DELETE :
-                    CharSequence selectedText = inputConnection.getSelectedText(0);
+                case DELETE_CODE :
+                    CharSequence selectedText = inputConnection.getTextBeforeCursor(1,0);
 
-                    if (TextUtils.isEmpty(selectedText)) {
+
+                    if (!TextUtils.isEmpty(selectedText)) {
                         inputConnection.deleteSurroundingText(1, 0);
-                    } else {
-                        inputConnection.commitText("", 1);
                     }
-                /*case Keyboard.KEYCODE_SHIFT:
-                    katakana = ! katakana;
-                    for (Keyboard.Key key: keyboard.getKeys()) {
-                        key.label = "" + katakanaChars[0];
-                    }
-
-                    keyboardView.invalidateAllKeys();
-                    break;*/
-                case Keyboard.KEYCODE_DONE:
-                    inputConnection.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
-
                     break;
                 case FIRST_HIRAGANA_CODE:
                     if (katakana) {
@@ -104,6 +104,14 @@ public class MyInputMethodService extends InputMethodService implements Keyboard
                         onKeyGeneralCase(primaryCode, keyCodes, inputConnection);
                     }
                     break;
+                case SWITCH_VOICED_CODE:
+                    kanaStatus = (kanaStatus == KanaKeyStatus.VOICED) ? KanaKeyStatus.NORMAL: KanaKeyStatus.VOICED;
+                    reloadKeyboard();
+                    break;
+                case SWITCH_SEMI_VOICED:
+                    kanaStatus = (kanaStatus == KanaKeyStatus.SEMI_VOICED) ? KanaKeyStatus.NORMAL: KanaKeyStatus.SEMI_VOICED;
+                    reloadKeyboard();
+                    break;
                 default :
                     onKeyGeneralCase(primaryCode, keyCodes, inputConnection);
 
@@ -116,17 +124,11 @@ public class MyInputMethodService extends InputMethodService implements Keyboard
         inputConnection.commitText(String.valueOf(code), 1);
     }
     private void reloadKeyboard() {
-        char [][] characters = getKanaGroup().getKeys();
-        int i = 0;
-        int k = 0;
+        MatrixColumnIterator matrixColumnIterator = new MatrixColumnIterator(getKanaGroup().getKeys(kanaStatus));
         for (Keyboard.Key key: keyboard.getKeys()) {
-            key.codes = new int [] {(int) characters[i][k]};
-            key.label = "" + characters[i][k];
-            k++;
-            if (k % characters[0].length == 0) {
-                k = 0;
-                i++;
-            }
+            Character c = matrixColumnIterator.next();
+            key.codes = new int [] {(int) c};
+            key.label = "" + c;
         }
         keyboardView.invalidateAllKeys();
     }
