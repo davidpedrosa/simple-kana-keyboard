@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:keyWidth="10%p"
+    android:horizontalGap="3px"
+    android:verticalGap="3px"
+    android:keyHeight="50dp"
+    android:keyTextColor="@color/colorAccent"
+    android:keyBackground="@color/colorPrimaryDark"
+    android:background="@color/colorPrimaryDark">
+
+    <Row>
+        <Key android:codes="113" android:keyLabel="あ"/>
+        <Key android:codes="119" android:keyLabel="か"/>
+        <Key android:codes="101" android:keyLabel="さ"/>
+        <Key android:codes="114" android:keyLabel="た"/>
+        <Key android:codes="116" android:keyLabel="な"/>
+        <Key android:codes="121" android:keyLabel="は"/>
+        <Key android:codes="117" android:keyLabel="ま"/>
+        <Key android:codes="112" android:keyLabel="ら"/>
+        <Key android:codes="112" android:keyLabel="わ"/>
+        <Key android:codes="112" android:keyLabel="ん"/>
+        <Key android:codes="112" android:keyLabel="°"/>
+    </Row>
+
+    <Row>
+        <Key android:codes="-5" android:keyLabel="を"/>
+        <Key android:codes="97" android:keyLabel="い"/>
+        <Key android:codes="115" android:keyLabel="き"/>
+        <Key android:codes="100" android:keyLabel="し"/>
+        <Key android:codes="102" android:keyLabel="ち"/>
+        <Key android:codes="103" android:keyLabel="に"/>
+        <Key android:codes="104" android:keyLabel="ひ"/>
+        <Key android:codes="106" android:keyLabel="み"/>
+        <Key android:codes="107" android:keyLabel="り"/>
+        <Key android:codes="-5" android:keyLabel="を"/>
+        <Key android:codes="-5" android:keyLabel="ゃ"/>
+        <Key android:codes="-5" android:keyLabel="̏"/>
+
+    </Row>
+
+    <Row>
+        <Key android:codes="122" android:keyLabel="う"/>
+        <Key android:codes="120" android:keyLabel="く"/>
+        <Key android:codes="99" android:keyLabel="す"/>
+        <Key android:codes="99" android:keyLabel="つ"/>
+        <Key android:codes="118" android:keyLabel="ぬ"/>
+        <Key android:codes="98" android:keyLabel="ふ"/>
+        <Key android:codes="110" android:keyLabel="む"/>
+        <Key android:codes="109" android:keyLabel="る"/>
+        <Key android:codes="46" android:keyLabel="や"/>
+        <Key android:codes="46" android:keyLabel="ょ"/>
+        <Key android:codes="46" android:keyLabel="ー"/>
+    </Row>
+
+    <Row>
+        <Key android:codes="122" android:keyLabel="え"/>
+        <Key android:codes="120" android:keyLabel="け"/>
+        <Key android:codes="99" android:keyLabel="せ"/>
+        <Key android:codes="118" android:keyLabel="て"/>
+        <Key android:codes="98" android:keyLabel="ね"/>
+        <Key android:codes="110" android:keyLabel="へ"/>
+        <Key android:codes="109" android:keyLabel="め"/>
+        <Key android:codes="46" android:keyLabel="れ"/>
+        <Key android:codes="46" android:keyLabel="ゆ"/>
+        <Key android:codes="46" android:keyLabel="ゅ"/>
+        <Key android:codes="63" android:keyLabel="〜"/>
+    </Row>
+
+    <Row>
+        <Key android:codes="122" android:keyLabel="お"/>
+        <Key android:codes="120" android:keyLabel="こ"/>
+        <Key android:codes="99" android:keyLabel="そ"/>
+        <Key android:codes="118" android:keyLabel="と"/>
+        <Key android:codes="98" android:keyLabel="の"/>
+        <Key android:codes="110" android:keyLabel="ほ"/>
+        <Key android:codes="109" android:keyLabel="も"/>
+        <Key android:codes="46" android:keyLabel="ろ"/>
+        <Key android:codes="46" android:keyLabel="よ"/>
+        <Key android:codes="46" android:keyLabel="っ"/>
+        <Key android:codes="46" android:keyLabel="-"/>
+    </Row>
+</Keyboard>
