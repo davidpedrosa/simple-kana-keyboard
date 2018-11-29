@@ -4,14 +4,17 @@ import android.inputmethodservice.InputMethodService;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputConnection;
+
+import java.util.Iterator;
 
 import davidpedrosa.github.com.kanaboard.helper.HiraganaKeyGroup;
 import davidpedrosa.github.com.kanaboard.helper.KanaKeyGroup;
 import davidpedrosa.github.com.kanaboard.helper.KanaKeyStatus;
 import davidpedrosa.github.com.kanaboard.helper.KatakanaKeyGroup;
-import davidpedrosa.github.com.kanaboard.helper.MatrixColumnIterator;
+import davidpedrosa.github.com.kanaboard.helper.MatrixCellIterator;
 
 public class MyInputMethodService extends InputMethodService implements KeyboardView.OnKeyboardActionListener {
 
@@ -28,6 +31,7 @@ public class MyInputMethodService extends InputMethodService implements Keyboard
     private static final int SWITCH_VOICED_CODE = (int) '̏';
     private static final int SWITCH_SEMI_VOICED = (int) '°';
     private static final int DELETE_CODE = (int) '<';
+    private static final int ENTER_CODE = (int) '⏎';
 
     private boolean katakana = false;
 
@@ -86,6 +90,9 @@ public class MyInputMethodService extends InputMethodService implements Keyboard
                         inputConnection.deleteSurroundingText(1, 0);
                     }
                     break;
+                case ENTER_CODE:
+                    inputConnection.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
+                    break;
                 case FIRST_HIRAGANA_CODE:
                     if (katakana) {
                         katakana = false;
@@ -124,7 +131,7 @@ public class MyInputMethodService extends InputMethodService implements Keyboard
         inputConnection.commitText(String.valueOf(code), 1);
     }
     private void reloadKeyboard() {
-        MatrixColumnIterator matrixColumnIterator = new MatrixColumnIterator(getKanaGroup().getKeys(kanaStatus));
+        Iterator<Character> matrixColumnIterator = new MatrixCellIterator(getKanaGroup().getKeys(kanaStatus));
         for (Keyboard.Key key: keyboard.getKeys()) {
             Character c = matrixColumnIterator.next();
             key.codes = new int [] {(int) c};
