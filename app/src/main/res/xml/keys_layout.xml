@@ -18,8 +18,8 @@
         <Key android:codes="117" android:keyLabel="ま"/>
         <Key android:codes="112" android:keyLabel="ら"/>
         <Key android:codes="112" android:keyLabel="わ"/>
-        <Key android:codes="63" android:keyLabel="〜" android:keyWidth="5%p"/>
-        <Key android:codes="46" android:keyLabel="°"  android:keyWidth="5%p"/>
+        <Key android:codes="63" android:keyLabel="〜"/>
+        <Key android:codes="46" android:keyLabel="°"/>
         <Key android:codes="60" android:keyLabel="&lt;" android:isRepeatable="true"/>
     </Row>
 
@@ -33,8 +33,8 @@
         <Key android:codes="106" android:keyLabel="み"/>
         <Key android:codes="107" android:keyLabel="り"/>
         <Key android:codes="-5" android:keyLabel="を"/>
-        <Key android:codes="46" android:keyLabel="̏" android:keyWidth="5%p"/>
-        <Key android:codes="112" android:keyLabel="ー" android:keyWidth="5%p"/>
+        <Key android:codes="46" android:keyLabel="̏"/>
+        <Key android:codes="112" android:keyLabel="ー"/>
         <Key android:codes="-5" android:keyLabel="っ"/>
 
     </Row>
@@ -50,6 +50,7 @@
         <Key android:codes="109" android:keyLabel="る"/>
         <Key android:codes="46" android:keyLabel="や"/>
         <Key android:codes="-5" android:keyLabel="ゃ"/>
+        <Key android:codes="-5" android:keyLabel="/"/>
         <Key android:codes="112" android:keyLabel="ん"/>
     </Row>
 
@@ -64,6 +65,7 @@
         <Key android:codes="46" android:keyLabel="れ"/>
         <Key android:codes="46" android:keyLabel="ゆ"/>
         <Key android:codes="46" android:keyLabel="ょ"/>
+        <Key android:codes="-5" android:keyLabel="("/>
         <Key android:codes="-4" android:keyLabel="E"/> <!-- Enter -->
     </Row>
 
@@ -78,6 +80,7 @@
         <Key android:codes="46" android:keyLabel="ろ"/>
         <Key android:codes="46" android:keyLabel="よ"/>
         <Key android:codes="46" android:keyLabel="ゅ"/>
+        <Key android:codes="-5" android:keyLabel=")"/>
         <Key android:codes="46" android:keyLabel="ア"/>
     </Row>
 </Keyboard>
